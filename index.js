@@ -51,6 +51,30 @@ function handleRetweetClick(tweetId){
 
 function handleReplyClick(replyId){
     document.getElementById(`replies-${replyId}`).classList.toggle('hidden')
+    
+    const replyBtnValue = document.getElementById(`reply-btn-${replyId}`)
+    
+    replyBtnValue.addEventListener("click", function() {
+
+            const targetTweetObj = tweetsData.filter(function(tweet){
+                return tweet.uuid === replyId
+            })[0]
+    
+            handleReplyTwtClick(targetTweetObj, replyId)
+        })
+
+}
+
+function handleReplyTwtClick(tweet, replyId) {
+    const replyInput = document.getElementById(`reply-input-${replyId}`)
+    
+    tweet.replies.push( {
+        handle: `@Scrimba`,
+        profilePic: `images/scrimbalogo.png`,
+        tweetText: replyInput.value,
+    })
+    
+    render()
 }
 
 function handleTweetBtnClick(){
@@ -121,6 +145,10 @@ function getFeedHtml(){
                 `
             })
         }
+        repliesHtml += `
+            <textarea class="tweet-reply" id="reply-input-${tweet.uuid}" placeholder="Tweet your reply"></textarea>
+            <button id="reply-btn-${tweet.uuid}" class="reply-btn">Reply</button>
+        `
           
         feedHtml += `
             <div class="tweet">

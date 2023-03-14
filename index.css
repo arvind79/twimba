@@ -133,6 +133,11 @@ button{
     background-color: #999;
 }
 
+.reply-btn {
+    margin: 5px 0 5px 40px;
+    width: 70%;
+}
+
 /* images */
 
 .profile-pic{
