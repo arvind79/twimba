@@ -68,13 +68,15 @@ function handleReplyClick(replyId){
 function handleReplyTwtClick(tweet, replyId) {
     const replyInput = document.getElementById(`reply-input-${replyId}`)
     
-    tweet.replies.push( {
-        handle: `@Scrimba`,
-        profilePic: `images/scrimbalogo.png`,
-        tweetText: replyInput.value,
-    })
-    
-    render()
+    if(replyInput.value) {
+        tweet.replies.push( {
+            handle: `@Scrimba`,
+            profilePic: `images/scrimbalogo.png`,
+            tweetText: replyInput.value,
+        })
+
+        render()
+    }
 }
 
 function handleTweetBtnClick(){
