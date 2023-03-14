@@ -122,15 +122,33 @@ button{
     position: relative;
 }
 
+.list-dlt {
+    position: absolute;
+    top: 15px;
+    right: 0;
+    padding: 0;
+    color: #0F8CDF;
+    padding: 5px 10px 5px 10px;
+    border-radius: 50%;
+    font-weight: 700;
+}
+
+.list-dlt:hover {
+    background-color: rgb(241 241 241);
+    cursor: pointer;
+}
+
 .delete {
     width: 22%;
     padding: 0;
     border-radius: 0px;
     position: absolute;
-    top: 15px;
-    right: 0;
+    top: 20px;
+    right: 20px;
     font-weight: 400;
-    background-color: #999;
+    background-color: #a0a0a0;
+    color: #000000;
+    border-radius: 20px;
 }
 
 .reply-btn {

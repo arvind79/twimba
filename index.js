@@ -1,6 +1,8 @@
 import { tweetsData } from './data.js'
 import { v4 as uuidv4 } from 'https://jspm.dev/uuid';
 
+let dltUuid = ""
+
 document.addEventListener('click', function(e){
     if(e.target.dataset.like){
        handleLikeClick(e.target.dataset.like) 
@@ -14,8 +16,14 @@ document.addEventListener('click', function(e){
     else if(e.target.id === 'tweet-btn'){
         handleTweetBtnClick()
     }
-    else if(e.target.dataset.delete) {
-        handleDeleteBtnClick(e.target.dataset.delete)
+    else if(e.target.dataset.hide) {
+        handleOptionsBtnClick(e.target.dataset.hide)
+        dltUuid = e.target.dataset.hide
+    }
+    else if(e.target.id === `delete-${dltUuid}`) {
+        // console.log(e.target.id)
+        // console.log(`delete-${dltUuid}`)
+        handleDeleteBtnClick(dltUuid)
     }
 })
  
@@ -99,10 +107,17 @@ function handleTweetBtnClick(){
     }
 }
 
-function handleDeleteBtnClick(deleteId) {
+function handleOptionsBtnClick(deleteId) {
+    const dltBtn = document.getElementById(`delete-${deleteId}`)
+    dltBtn.classList.toggle("hidden")
+}
+
+function handleDeleteBtnClick(deleteId){
+    const dltBtn = document.getElementById(`delete-${deleteId}`)
+
     let i = 0           //get the index of an array position which is to be deleted
     let index = i      
-    tweetsData.forEach(function(tweet) {
+    tweetsData.forEach(function(tweet){
         if(tweet.uuid == deleteId) {
             index = i
         }
@@ -158,7 +173,10 @@ function getFeedHtml(){
                     <img src="${tweet.profilePic}" class="profile-pic">
                     <div>
                         <p class="handle">${tweet.handle}</p>
-                        <button class="delete" data-delete="${tweet.uuid}">Delete</button>
+                        <div>
+                            <span class="list-dlt" data-hide="${tweet.uuid}">:</span>
+                            <button class="delete hidden" id="delete-${tweet.uuid}">Delete</button>
+                        </div>
                         <p class="tweet-text">${tweet.tweetText}</p>
                         <div class="tweet-details">
                             <span class="tweet-detail">
